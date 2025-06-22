@@ -2,10 +2,11 @@ name: Run Python Script Every 5 Minutes
 
 on:
   schedule:
-    - cron: '*/5 * * * *'    # Runs every 5 minutes
-  workflow_dispatch:
+    - cron: '*/5 * * * *'  # Every 5 minutes
   push:
-    branches: [main]
+    branches:
+      - main
+  workflow_dispatch:  # Allow manual trigger from GitHub UI
 
 jobs:
   build:
@@ -13,12 +14,23 @@ jobs:
 
     steps:
     - name: Checkout code
-      uses: actions/checkout@v4
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v5
+      uses: actions/setup-python@v4
       with:
         python-version: '3.12'
 
     - name: Run the script
-      run: python main.py
+      run: |
+        date
+        python main.py
+        echo "--- Log File Contents ---"
+        cat execution_log.txt || echo "No log file found"
+
+    - name: Upload execution log
+      uses: actions/upload-artifact@v3
+      with:
+        name: execution-log
+        path: execution_log.txt
+
