@@ -12,3 +12,7 @@ if current_time > END_TIME:
 else:
     print(f"✅ Running task at {current_time}")
     # Your main logic goes here
+# main.py
+with open("execution_log.txt", "a") as f:
+    f.write(f"{datetime.utcnow()} - Ran: {current_time <= END_TIME}\n")
+
