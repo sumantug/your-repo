@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 
 # Set your execution window start time (UTC)
-START_TIME = datetime(2025, 6, 22, 10, 0)  # Change to your desired start UTC time
+START_TIME = datetime(2025, 6, 22, 5, 10)  # Change to your desired start UTC time
 END_TIME = START_TIME + timedelta(minutes=30)
 
 current_time = datetime.utcnow()
